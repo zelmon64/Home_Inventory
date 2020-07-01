@@ -9,10 +9,10 @@
 		// reset loan on item
 		$sSql = 'UPDATE Item SET ITM_LendDate = NULL, ITM_LendToId = NULL' .
 				" WHERE ITM_LendToId = {$_REQUEST['id']}";
-		$result = mysql_query($sSql) or die('Query failed: ' . mysql_error());
+		$result = mysqli_query($GLOBALS['link'], $sSql) or die('Query failed: ' . mysqli_error($GLOBALS['link']));
 		
 		$sSql = "DELETE FROM Person WHERE PPL_ID = {$_REQUEST['id']}";
-		$result = mysql_query($sSql) or die('Query failed: ' . mysql_error());
+		$result = mysqli_query($GLOBALS['link'], $sSql) or die('Query failed: ' . mysqli_error($GLOBALS['link']));
 	}
 		
 	// save a person
@@ -30,7 +30,7 @@
 			$sTelefone = safeAddSlashes($_REQUEST['PPL_Telefone']);
 			$sSql = 'INSERT INTO Person(PPL_Name, PPL_Telefone, PPL_EMail) ' .
 					"VALUES('$sName', '$sTelefone', '{$_REQUEST['PPL_EMail']}')";
-			$result = mysql_query($sSql) or die('Query failed: ' . mysql_error());
+			$result = mysqli_query($GLOBALS['link'], $sSql) or die('Query failed: ' . mysqli_error($GLOBALS['link']));
 		}
 	}
 	

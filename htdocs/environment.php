@@ -1,17 +1,17 @@
 <?php
 
 	// edit the following constants with your home inventory root...
-	define('SITE_PATH', '/var/www/localhost/home_inventory/');
+	define('SITE_PATH', '/var/www/html/home_inventory/');
 	// smarty package installation path (depends on your linux distribution)...
-	define('SMARTY_DIR', '/usr/share/php/smarty/');
+	define('SMARTY_DIR', '/usr/local/lib/php/Smarty/');
 	// MySQL info
 	define('MYSQL_DATABASE_NAME', 'home_inventory');
 	define('MYSQL_USER', 'homeinv');
 	define('MYSQL_PASSWD', 'your_password');
-	define('MYSQL_SERVER_HOSTNAME', 'your_hostname');
+	define('MYSQL_SERVER_HOSTNAME', 'localhost');
 	// home inventory's login user...
-	define('HOMEINV_USERNAME', 'username');
-	define('HOMEINV_PASSWD', 'passwd');	
+	define('HOMEINV_USERNAME', 'u');
+	define('HOMEINV_PASSWD', 'p');	
 
 	// default accepted picture size 120KB
 	define('PICTURE_MAXSIZE', 122880);
@@ -23,18 +23,18 @@
 	session_start();
 	
 	// Connecting, selecting database
-	$link = mysql_connect(MYSQL_SERVER_HOSTNAME, MYSQL_USER, MYSQL_PASSWD)
-		or die('Could not connect: ' . mysql_error());
-	mysql_select_db(MYSQL_DATABASE_NAME) 
-		or die('Could not select database');
+	$link = mysqli_connect(MYSQL_SERVER_HOSTNAME, MYSQL_USER, MYSQL_PASSWD, MYSQL_DATABASE_NAME)
+		or die('Could not connect: ' . mysqli_error($GLOBALS['link']));
 
 	$GLOBALS['MSG_QUEUE'] = array();
 	
 	$smarty = new Smarty();
-	$smarty->template_dir = SITE_PATH . 'smarty/templates/';
-	$smarty->compile_dir = SITE_PATH . 'smarty/templates_c/';
-	$smarty->configs = SITE_PATH . 'smarty/configs/';
-	$smarty->cache = SITE_PATH . 'smarty/cache/';
+	$smarty->debugging = false;
+	$smarty->error_reporting = E_ALL & ~E_NOTICE;
+	$smarty->setTemplateDir(SITE_PATH . 'smarty/templates')
+		->setCompileDir(SITE_PATH . 'smarty/templates_c')
+		->setConfigDir(SITE_PATH . 'smarty/configs')
+		->setCacheDir(SITE_PATH . 'smarty/cache');
 	$GLOBALS['hSmarty'] = $smarty;
 	
 	
@@ -61,17 +61,17 @@
 	
 	function fetchFromDb($sSql, $bRow = false)
 	{
-		$result = mysql_query($sSql) or die('Query failed: ' . mysql_error());
+		$result = mysqli_query($GLOBALS['link'], $sSql) or die('Query failed: ' . mysqli_error($GLOBALS['link']));
 
 		if ($bRow == false)
 		{
 			$a = array();
-			while ($line = mysql_fetch_array($result, MYSQL_ASSOC)) 
+			while ($line = mysqli_fetch_array($result)) 
 				$a[] = $line;
 			return $a;
 		}
 		else
-			return mysql_fetch_array($result, MYSQL_ASSOC);
+			return mysqli_fetch_array($result);
 	}
 	
 	

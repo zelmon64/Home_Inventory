@@ -23,13 +23,13 @@
 				
 			$sSql = 'INSERT INTO Picture(PCT_ItemId, PCT_FileName) ' .
 						"VALUES({$_REQUEST['id']}, '$sPict')";
-			$result = mysql_query($sSql) or die('Query failed: ' . mysql_error());
+			$result = mysqli_query($GLOBALS['link'], $sSql) or die('Query failed: ' . mysqli_error($GLOBALS['link']));
 		}
 	}
 	elseif ($_REQUEST['action'] == 'deletePicture' && is_numeric($_REQUEST['pictId']))
 	{
 		$sSql = "DELETE FROM Picture WHERE PCT_ID = {$_REQUEST['pictId']}";
-		$result = mysql_query($sSql) or die('Query failed: ' . mysql_error());
+		$result = mysqli_query($GLOBALS['link'], $sSql) or die('Query failed: ' . mysqli_error($GLOBALS['link']));
 		// delete file on disk
 		@unlink(SITE_PATH . 'htdocs/images/items/' .$_REQUEST['pictFileName']);
 	}

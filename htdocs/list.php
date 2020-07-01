@@ -25,13 +25,13 @@
 			@unlink(SITE_PATH . 'htdocs/images/items/' . $pict['PCT_FileName']);
 
 		$sSql = 'DELETE FROM Picture WHERE PCT_ItemId = ' . $_REQUEST['id'];
-		$result = mysql_query($sSql) or die('Query failed: ' . mysql_error());
+		$result = mysqli_query($GLOBALS['link'], $sSql) or die('Query failed: ' . mysqli_error($GLOBALS['link']));
 		
 		if (!empty($pictName['ITM_Picture']))
 			@unlink(SITE_PATH . 'htdocs/images/items/' . $pictName['ITM_Picture']);
 			
 		$sSql = "DELETE FROM Item WHERE ITM_ID = {$_REQUEST['id']}";
-		$result = mysql_query($sSql) or die('Query failed: ' . mysql_error());
+		$result = mysqli_query($GLOBALS['link'], $sSql) or die('Query failed: ' . mysqli_error($GLOBALS['link']));
 	}
 	elseif ($_REQUEST['action'] == 'deleteSelected' && isset($_POST['chkItem']))
 	{
@@ -41,7 +41,7 @@
 		$aPictures = fetchFromDb($sSql);
 
 		$sSql = "DELETE FROM Item WHERE ITM_ID IN ($sId)";
-		$result = mysql_query($sSql) or die('Query failed: ' . mysql_error());
+		$result = mysqli_query($GLOBALS['link'], $sSql) or die('Query failed: ' . mysqli_error($GLOBALS['link']));
 		
 		foreach ($aPictures as $pict)
 			if (!empty($pict['ITM_Picture']))

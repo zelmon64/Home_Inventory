@@ -44,9 +44,9 @@
 				$sDesc2 = safeAddSlashes($_REQUEST['LOC_Description2']);
 				$sSql = 'INSERT INTO Location(LOC_Description1, LOC_Description2) ' .
 						"VALUES('$sDesc1', '$sDesc2')";
-				$result = mysql_query($sSql) or die('Query failed: ' . mysql_error());
+				$result = mysqli_query($GLOBALS['link'], $sSql) or die('Query failed: ' . mysqli_error($GLOBALS['link']));
 				$newLocId = fetchFromDb('SELECT LAST_INSERT_ID() AS last FROM Location', true) 
-					or die('Query failed: ' . mysql_error());
+					or die('Query failed: ' . mysqli_error($GLOBALS['link']));
 				$newLocId = $newLocId['last'];
 			}
 			
@@ -140,7 +140,7 @@
 						($nPurDate!='NULL' ? "'$nPurDate'" : $nPurDate) . ", '$sPurLoc', " .
 						" '$sPurPrice', '$sCurValue', '$sReplCost', '$sWarrant', '$sHistory')";
 			//print_R($sSql);
-			$result = mysql_query($sSql) or die('Query failed: ' . mysql_error());
+			$result = mysqli_query($GLOBALS['link'], $sSql) or die('Query failed: ' . mysqli_error($GLOBALS['link']));
 			
 			// if picture has changed, delete previous
 			if ($bDeleteLastPicture)

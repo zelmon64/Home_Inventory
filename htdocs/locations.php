@@ -12,7 +12,7 @@
                         @unlink(SITE_PATH . 'htdocs/images/locations/' . $pictName['LOC_Picture']);
                         
                 $sSql = "DELETE FROM Location WHERE LOC_ID = {$_REQUEST['id']}";
-                $result = mysql_query($sSql) or die('Query failed: ' . mysql_error());
+                $result = mysqli_query($GLOBALS['link'], $sSql) or die('Query failed: ' . mysqli_error($GLOBALS['link']));
 
                 unset($_SESSION['LOCATIONS']);
         }
@@ -56,13 +56,13 @@
                                 $sDesc2 = safeAddSlashes($_REQUEST['LOC_Description2']);
                                 $sSql = 'INSERT INTO Location(LOC_Description1, LOC_Description2, LOC_Picture) ' .
                                                 "VALUES('$sDesc1', '$sDesc2', '$sPict')";
-                                $result = mysql_query($sSql);
+                                $result = mysqli_query($GLOBALS['link'], $sSql);
                                 if (!$result)
                                 {
                                         // delete uploaded image on error
                                         if (strlen($sPict) > 0)
                                                 @unlink(SITE_PATH . "htdocs/images/locations/$sPict");
-                                        die('Query failed: ' . mysql_error());
+                                        die('Query failed: ' . mysqli_error($GLOBALS['link']));
                                 }
                         }
                         
