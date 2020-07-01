@@ -168,14 +168,14 @@
 		$aItem = fetchFromDb($sSql, true);
 
 		if (empty($aItem['ITM_LendDate']))
-			$aItem['ITM_LendDate'] = '--';
+			$aItem['ITM_LendDate'] = null;
 		else
 			$aItem['ITM_LendDate'] = substr($aItem['ITM_LendDate'], 0, 4) . 
 									 substr($aItem['ITM_LendDate'], 5, 2) .
 									 substr($aItem['ITM_LendDate'], 8, 2) . '000000';
 									 
 		if (empty($aItem['ITM_PurchaseDate'])) 
-			$aItem['ITM_PurchaseDate'] = '--';
+			$aItem['ITM_PurchaseDate'] = null;
 		else
 			$aItem['ITM_PurchaseDate'] = substr($aItem['ITM_PurchaseDate'], 0, 4) . 
 									 	 substr($aItem['ITM_PurchaseDate'], 5, 2) .
@@ -198,7 +198,7 @@
 			
 		if ($bLendIncompleteDate || empty($_REQUEST['action']) || (!empty($_REQUEST['action']) && !$bLendAtLeastOne))
 		{
-			$aItem['ITM_LendDate'] = '--';
+			$aItem['ITM_LendDate'] = null;
 		}
 		else
 		{
@@ -209,7 +209,7 @@
 		
 		if ($bPurIncompleteDate || empty($_REQUEST['action']) || (!empty($_REQUEST['action']) && !$bPurAtLeastOne))
 		{
-			$aItem['ITM_PurchaseDate'] = '--';
+			$aItem['ITM_PurchaseDate'] = null;
 		}
 		else
 		{
