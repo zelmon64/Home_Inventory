@@ -6,8 +6,6 @@
 	checkAuth($_SERVER['PHP_SELF'] . '?' . $_SERVER['QUERY_STRING']);
 	
 
-	define('REC_4_PAGE', 10);
-	
 	//print_r($_SESSION['SEARCH']);
 	//print_R($_REQUEST);
 	if ($_REQUEST['action'] == 'deleteOne' && isset($_REQUEST['id']))

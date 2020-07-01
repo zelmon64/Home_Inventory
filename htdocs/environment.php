@@ -16,6 +16,9 @@
 	// default accepted picture size 120KB
 	define('PICTURE_MAXSIZE', 122880);
 	
+	// maximum number of records per page...
+	define('REC_4_PAGE', 10);
+	
 	require_once(SMARTY_DIR . 'Smarty.class.php');
 	
 	
