@@ -207,7 +207,7 @@
 									 (strlen($_REQUEST['lendingDateDay'])==1 ? '0' : '').$_REQUEST['lendingDateDay'] . '000000';
 		}
 		
-		if ($bPurIncompleteDate || empty($_REQUEST['action']) || (!empty($_REQUEST['action']) && !$bLendAtLeastOne))
+		if ($bPurIncompleteDate || empty($_REQUEST['action']) || (!empty($_REQUEST['action']) && !$bPurAtLeastOne))
 		{
 			$aItem['ITM_PurchaseDate'] = '--';
 		}
