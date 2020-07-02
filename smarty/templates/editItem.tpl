@@ -109,7 +109,7 @@
 						</select>
 						&nbsp;&nbsp;&nbsp;
 						date:
-						{html_select_date prefix="lendingDate" time=$ITEM.ITM_LendDate all_empty="---" field_order='dmY' month_format="%m" start_year="2005" reverse_years="true"}
+						{html_select_date prefix="lendingDate" time=$ITEM.ITM_LendDate all_empty="---" field_order='dmY' month_format="%m" start_year="2005" reverse_years="true" month_names=array(1=>'Jan', 2=>'Feb', 3=>'Mar', 4=>'Apr', 5=>'May', 6=>'Jun', 7=>'Jul', 8=>'Aug', 9=>'Sep', 10=>'Oct', 11=>'Nov', 12=>'Dec')}
 						<br/><br/>
 					</td>
 				</tr>
@@ -145,7 +145,7 @@
 				<tr>
 					<td class="tabledata3" align="left" ><b>Purchase date - Location - Price</b></td>
 					<td valign="top" colspan="2" class="tabledata3">
-						{html_select_date prefix="purchaseDate" time=$ITEM.ITM_PurchaseDate all_empty="---" field_order='dmY' month_format="%m" start_year="1910" reverse_years="true"}
+						{html_select_date prefix="purchaseDate" time=$ITEM.ITM_PurchaseDate all_empty="---" field_order='dmY' month_format="%m" start_year="1910" reverse_years="true" month_names=array(1=>'Jan', 2=>'Feb', 3=>'Mar', 4=>'Apr', 5=>'May', 6=>'Jun', 7=>'Jul', 8=>'Aug', 9=>'Sep', 10=>'Oct', 11=>'Nov', 12=>'Dec')}
 						&nbsp;&nbsp;-&nbsp;&nbsp;
 						<input type="text" class="text" size="25" name="ITM_PurchaseLocation" value="{$ITEM.ITM_PurchaseLocation|escape}">&nbsp;&nbsp;-&nbsp;&nbsp;
 						<input type="text" class="text" size="10" name="ITM_PurchasePrice" value="{$ITEM.ITM_PurchasePrice|escape}">
