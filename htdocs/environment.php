@@ -130,7 +130,7 @@
 			$i = 1;
 			while (file_exists($dir_name.$file_name)) 
 			{
-				$file_name = ereg_replace('(.*)(\.[a-zA-Z]+)$', '\1_'.$i.'\2', $data['name']);
+				$file_name = preg_replace('/(.*)(\.[a-zA-Z]+)$/', '\1_'.$i.'\2', $data['name']);
 				$i++;
 			}
 			
